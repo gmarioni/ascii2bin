@@ -4,7 +4,7 @@
 /* Date:    3-3-2021            */
 /********************************/
 /* Description:  program that converts ascii to binary */
-/* Validation Checks:   none  */
+/* Validation Checks:   one makes sure file isn't empty, another that the file only has 1's and 0's  */
 /* Enhancements:       none     */
 /********************************/
 #include "stdio.h"
@@ -22,15 +22,18 @@ int main (int argc, char * argv[], char ** envp) {
     int maxNumber = 0;
     char ascii_value;
     int digit = 0;
-    int returnVAlue = 0;
+    int returnValue = 1;
     read(STDIN_FILENO, &ascii_value, 1);
-    while (retval == 1){
-
-        if(ascii_value == 10 /* add in null */){
+    while (retval == 1) {
+        /* the two else-if statements are input validation
+        the first if statment checks for end-of-file. */
+        if(ascii_value == 10){
             break;
-        }
-        if(ascii_value != '0' && ascii_value != '1'){
-            returnVAlue =  1;
+        } else if (ascii_value == 0) {
+            printf("Error. Input file cannot be empty.\n");
+            break;
+        }else if(ascii_value != '0' && ascii_value != '1') {
+            printf("Error. Input file must contain only 0's and 1's.\n");
             break;
         }
         /* recall lecture 2/23 slide title: Base N to Base10
@@ -59,7 +62,9 @@ int main (int argc, char * argv[], char ** envp) {
 
     }
         
-    /* this print is what returns the unsigned decimal by using '%u' */    
+    /* this print is what returns the unsigned decimal by using '%u'
+    EDITS TO MAKE: put this in an if() statement so that it won't print
+    if the input validation kicks in */    
     printf("%u\n", number);
-    return returnVAlue;
+    return returnValue;
     }
