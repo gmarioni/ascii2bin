@@ -68,6 +68,9 @@ int main (int argc, char * argv[], char ** envp) {
     /* this print is what returns the unsigned decimal by using '%u' */    
     if(print) {
         printf("%u\n", number);
+        return 0;
+    } else {
+        return returnValue;
     }
-    return returnValue;
+    
     }
