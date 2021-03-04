@@ -5,7 +5,7 @@
 /********************************/
 /* Description:  program that converts ascii to binary */
 /* Validation Checks:   one makes sure file isn't empty, another that the file only has 1's and 0's  */
-/* Enhancements:       none     */
+/* Enhancements: Input validation outputs a message indicating the error   */
 /********************************/
 #include "stdio.h"
 #include "stdlib.h"
