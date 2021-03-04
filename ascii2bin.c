@@ -39,30 +39,10 @@ int main (int argc, char * argv[], char ** envp) {
             print = false;
             break;
         }
-        /* recall lecture 2/23 slide title: Base N to Base10
-        the way to go from binary to base 10 was v = v*2+d
-        WHERE d is the binary digit. SO, "digit" here on line 50 gets the
-        binary digit from the .txt file ONE at a time. THEN it isn't
-        getting a 1 or a 0, it's actually getting a 48 or a 49 
-        (the ascii encoding of 0 or 1 respectively), SO 48 has
-        to be subtracted to actually get a 0 or 1. From there
-        number = (number << 1) + digit is the v = v*2+d from lecture */
-        digit = ascii_value - offset;
-        /* what line 61 does is the conversion from base
-        N to Base 10 slide (lecture 2/23: v=v*2+d) 
-        WHICH is why number starts at 0. So the first iteration
-        is v= 0*2 + 1  WHERE the 1 was read from the read() call.
-        The result is 1. The next iteration is 
-        1 (which is the result from last time) *2 + 0 WHERE 0 was
-        read from the read() call. The RESULT is 2. The next iteration is
-        2*2+0 (again from read call). RESULT is 4. The loop iterates
-        and reads in all the 1's and 0's one at a time from the file it
-        read in */
-        number = (number << 1) + digit;  
+        digit = ascii_value - offset; //see note 1 for explanation of what this does in the program
+        number = (number << 1) + digit;//see note 2 for explanation of what this does in the program
         retval = read(0, &ascii_value, 1); //this reads in the next char from the file
         print = true;
-        
-
     }
         
     /* this print is what returns the unsigned decimal by using '%u' */    
@@ -72,5 +52,24 @@ int main (int argc, char * argv[], char ** envp) {
     } else {
         return returnValue;
     }
-    
+        /*NOTE 1: recall lecture 2/23 slide title: Base N to Base10
+        the way to go from binary to base 10 was v = v*2+d
+        WHERE d is the binary digit. SO, "digit" here on line 50 gets the
+        binary digit from the .txt file ONE at a time. THEN it isn't
+        getting a 1 or a 0, it's actually getting a 48 or a 49 
+        (the ascii encoding of 0 or 1 respectively), SO 48 has
+        to be subtracted to actually get a 0 or 1. From there
+        number = (number << 1) + digit is the v = v*2+d from lecture */
+
+        /* NOTE 2: what line 61 does is the conversion from base
+        N to Base 10 slide (lecture 2/23: v=v*2+d) 
+        WHICH is why number starts at 0. So the first iteration
+        is v= 0*2 + 1  WHERE the 1 was read from the read() call.
+        The result is 1. The next iteration is 
+        1 (which is the result from last time) *2 + 0 WHERE 0 was
+        read from the read() call. The RESULT is 2. The next iteration is
+        2*2+0 (again from read call). RESULT is 4. The loop iterates
+        and reads in all the 1's and 0's one at a time from the file it
+        read in */
+
     }
